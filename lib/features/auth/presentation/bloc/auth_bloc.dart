@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:blog/features/auth/domain/entities/user_entity.dart';
+import 'package:blog/features/auth/domain/usecase/current_user.dart';
 import 'package:blog/features/auth/domain/usecase/user_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,15 +14,19 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserSignUp _userSignUp;
   final UserLogin _userLogin;
+  final CurrentUser _currentUser;
 
   AuthBloc({
     required UserSignUp userSignUp,
     required UserLogin userLogin,
+    required CurrentUser currentUser,
   })  : _userSignUp = userSignUp,
         _userLogin = userLogin,
+        _currentUser = currentUser,
         super(AuthInitial()) {
     on(_signUpEvent);
     on(_loginIn);
+    on(_onAuthIsUserLoggedIn);
   }
 
   Future<void> _loginIn(AuthLogin event, Emitter<AuthState> emit) async {
@@ -58,6 +63,24 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (user) => emit(
         AuthSuccess(user: user),
       ),
+    );
+  }
+
+  void _onAuthIsUserLoggedIn(
+      AuthIsUserLoggedIn event, Emitter<AuthState> emit) async {
+    final res = await _currentUser(NoParam());
+
+    res.fold(
+      (l) {
+        emit(
+          AuthFailure(l.message),
+        );
+      },
+      (r) {
+        emit(
+          AuthSuccess(user: r),
+        );
+      },
     );
   }
 }

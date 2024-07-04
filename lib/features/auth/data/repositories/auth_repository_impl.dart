@@ -17,8 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     return _getUser(
-      () async => await authRemotedDataSource.signInWithEmailAndPassword(
-        name: email,
+      () async => await authRemotedDataSource.loginInWithEmailAndPassword(
         email: email,
         password: password,
       ),
@@ -49,6 +48,22 @@ class AuthRepositoryImpl implements AuthRepository {
       return left(
         Failures(e.message),
       );
+    } on ServerException catch (e) {
+      return left(
+        Failures(e.message),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failures, UserEntity>> currentUser() async {
+    try {
+      final user = await authRemotedDataSource.getUserData();
+
+      if (user == null) {
+        left(Failures('Current user not logged in'));
+      }
+      return right(user!);
     } on ServerException catch (e) {
       return left(
         Failures(e.message),

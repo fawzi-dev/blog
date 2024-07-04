@@ -6,7 +6,6 @@ import 'package:blog/features/auth/presentation/pages/signup_page.dart';
 import 'package:blog/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog/features/auth/presentation/widgets/auth_gradient_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -89,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                             context.read<AuthBloc>().add(
                                   AuthLogin(
                                     email: email.text.trim(),
-                                    password: email.text.trim(),
+                                    password: password.text.trim(),
                                   ),
                                 );
                           }

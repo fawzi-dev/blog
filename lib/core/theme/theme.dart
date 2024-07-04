@@ -1,6 +1,5 @@
 import 'package:blog/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class AppTheme {
   // Input decoration style
@@ -14,7 +13,7 @@ class AppTheme {
 
   static final darkThemeMode = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: AppPallete.backgroundColor,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppPallete.backgroundColor
     ),
     inputDecorationTheme: InputDecorationTheme(
