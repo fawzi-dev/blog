@@ -18,11 +18,13 @@ class AppTheme {
       contentPadding: const EdgeInsets.all(27),
       enabledBorder: _border(),
       focusedBorder: _border(AppPallete.gradient2),
+      errorBorder: _border(AppPallete.errorColor),
+      border: _border(AppPallete.gradient2),
+      errorStyle: const TextStyle(color: AppPallete.errorColor),
     ),
     chipTheme: const ChipThemeData(
       color: WidgetStatePropertyAll(AppPallete.backgroundColor),
       side: BorderSide.none,
-      
     ),
   );
 }
