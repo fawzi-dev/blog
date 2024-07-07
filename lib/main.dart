@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    context.read<AuthBloc>().add(AuthIsUserLoggedIn());
+    // context.read<AuthBloc>().add(AuthIsUserLoggedIn());
   }
 
   @override

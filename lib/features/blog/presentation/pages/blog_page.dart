@@ -58,23 +58,30 @@ class _BlogPageState extends State<BlogPage> {
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ListView.builder(
-                itemCount: blogPosts.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context, BlogViewerPage.route(blogPosts[index]));
+            child: blogPosts.isNotEmpty
+                ? ListView.builder(
+                    itemCount: blogPosts.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context, BlogViewerPage.route(blogPosts[index]));
+                        },
+                        child: BlogCardPage(
+                          blog: blogPosts[index],
+                          color:
+                              Colors.primaries[index % Colors.primaries.length],
+                        ),
+                      );
                     },
-                    child: BlogCardPage(
-                      blog: blogPosts[index],
-                      color: Colors.primaries[index % Colors.primaries.length],
-                    ),
-                  );
-                }),
+                  )
+                : const Center(
+                    child: Text('No blogs yet'),
+                  ),
           ),
         );
       },
     );
   }
 }
+

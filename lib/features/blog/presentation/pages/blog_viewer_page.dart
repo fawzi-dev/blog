@@ -3,13 +3,12 @@ import 'package:blog/core/theme/app_pallete.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blog/features/blog/data/models/blog_model.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../core/utils/calculate_reading_time.dart';
 import '../../../../core/utils/format_date.dart';
 
+// ignore: must_be_immutable
 class BlogViewerPage extends StatelessWidget {
   static route(BlogModel blog) => MaterialPageRoute(
         builder: (context) => BlogViewerPage(
