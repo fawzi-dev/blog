@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blog/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:blog/core/common/widgets/loader.dart';
+import 'package:blog/core/constants/constants.dart';
 import 'package:blog/core/utils/image_picker.dart';
 import 'package:blog/features/blog/presentation/bloc/blog_bloc.dart';
 import 'package:blog/features/blog/presentation/pages/blog_page.dart';
@@ -67,7 +68,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
             showSnackBar(context, state.message);
           }
           if (state is BlogUploadSuccess) {
-            Navigator.pushAndRemoveUntil(context, BlogPage.route(), (val) { 
+            Navigator.pushAndRemoveUntil(context, BlogPage.route(), (val) {
               return false;
             });
           }
@@ -136,14 +137,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: [
-                          'Business',
-                          'Technology',
-                          'Entertainment',
-                          'Science',
-                          'Health',
-                          'Politics',
-                        ]
+                        children: Constants.topics
                             .map(
                               (e) => Padding(
                                 padding: const EdgeInsets.only(right: 5.0),

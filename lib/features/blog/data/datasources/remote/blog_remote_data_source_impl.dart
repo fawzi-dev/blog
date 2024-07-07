@@ -35,7 +35,9 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSources {
       return client.storage
           .from('blog_images')
           .getPublicUrl(blogModel.id.toString());
-    } catch (e) {
+    } on StorageException catch (e) {
+      throw ServerException(e.message);
+    } on ServerException catch (e) {
       throw ServerException(e.toString());
     }
   }
