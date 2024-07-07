@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:blog/features/blog/data/datasources/blog_remote_data_source.dart';
+import 'package:blog/features/blog/data/datasources/remote/blog_remote_data_source.dart';
 import 'package:blog/features/blog/data/models/blog_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../../core/error/exception.dart';
+import '../../../../../core/error/exception.dart';
 
 class BlogRemoteDataSourceImpl implements BlogRemoteDataSources {
   final SupabaseClient client;
@@ -48,6 +48,8 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSources {
           .map((e) =>
               BlogModel.fromMap(e).copyWith(posterName: e['profiles']['name']))
           .toList();
+    } on PostgrestException catch (e) {
+      throw ServerException(e.message);
     } on ServerException catch (e) {
       throw ServerException(e.message);
     }

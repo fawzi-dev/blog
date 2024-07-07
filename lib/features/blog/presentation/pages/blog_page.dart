@@ -1,6 +1,8 @@
 import 'package:blog/core/common/widgets/loader.dart';
 import 'package:blog/core/utils/show_snackbar.dart';
 import 'package:blog/features/blog/presentation/pages/add_new_blog_page.dart';
+import 'package:blog/features/blog/presentation/pages/blog_viewer_page.dart';
+import 'package:blog/features/blog/presentation/widgets/blog_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,14 +58,20 @@ class _BlogPageState extends State<BlogPage> {
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-                child: Column(
-              children: blogPosts
-                  .map((e) => ListTile(
-                        title: Text(e.title ?? ''),
-                      ))
-                  .toList(),
-            )),
+            child: ListView.builder(
+                itemCount: blogPosts.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context, BlogViewerPage.route(blogPosts[index]));
+                    },
+                    child: BlogCardPage(
+                      blog: blogPosts[index],
+                      color: Colors.primaries[index % Colors.primaries.length],
+                    ),
+                  );
+                }),
           ),
         );
       },
