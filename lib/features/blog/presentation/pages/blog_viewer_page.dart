@@ -42,8 +42,7 @@ class BlogViewerPage extends StatelessWidget {
               children: [
                 Text(
                   blogModel.title ?? "",
-                  style: const TextStyle(
-                      fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const Gap(16),
                 Text(
@@ -53,18 +52,20 @@ class BlogViewerPage extends StatelessWidget {
                 const Gap(4),
                 Text(
                   '$dateText . $readingTimeText min',
-                  style: textTheme.labelMedium!
-                      .copyWith(color: AppPallete.greyColor),
+                  style: textTheme.labelMedium!.copyWith(color: AppPallete.greyColor),
                 ),
                 const Gap(8),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: SizedBox(
-                    height: 250,
-                    child: Image.network(
-                      blogModel.imageUrl ?? '',
-                      width: double.infinity,
-                      fit: BoxFit.cover,
+                  child: Card(
+                    child: SizedBox(
+                      height: 250,
+                      child: Image.network(blogModel.imageUrl ?? '', width: double.infinity, fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                        return const Center(
+                          child: Text('Image not found'),
+                        );
+                      }),
                     ),
                   ),
                 ),

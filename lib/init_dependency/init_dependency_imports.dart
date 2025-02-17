@@ -1,3 +1,5 @@
+
+// Imports of the main file
 import 'package:blog/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:blog/core/secrets/app_secrets.dart';
 import 'package:blog/features/auth/data/datasources/auth_remote_data_source.dart';
@@ -24,4 +26,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../core/network/connection_checker.dart';
 import '../../features/blog/data/repository/blog_repository_impl.dart';
 
+
+
+// The main file
 part 'init_dependencies.dart';
